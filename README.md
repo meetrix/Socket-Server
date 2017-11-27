@@ -11,23 +11,24 @@
 7. Notify others when leaving the room. (Room-name, User-name)
 
 ## Project Structure
+.
++-- app.js
++-- bin
+|   +-- www
++-- package.json
++-- public
+|   +-- images
+|   +-- javascripts
+|   +-- stylesheets
+|     +--style.css
++-- routes
+|   +-- index.js
+|   +-- users.js
++-- views
+|   +-- error.pug
+|   +-- index.pug
+|   +-- layout.pug
 
-* |__ app.js
-* |__ bin
-*     |__ www
-* |__ package.json
-* |__ public
-*     |__ images
-*     |__ javascripts
-*     |__ stylesheets
-*         |__ style.css
-* |__ routes
-*     |__ index.js
-*     |__ users.js
-*|── views
-*   |__ error.pug
-*   |__ index.pug
-*   |__ layout.pug
 
 
 
