@@ -12,9 +12,22 @@
 
 ## Project Structure
 
- 1. index.js - Create server and define socket events.
- 2. Eventhandler
-      * |___room.js - Configure a room.
-      * |___user.js - Configure a user.
+* |__ app.js
+* |__ bin
+*     |__ www
+* |__ package.json
+* |__ public
+*     |__ images
+*     |__ javascripts
+*     |__ stylesheets
+*         |__ style.css
+* |__ routes
+*     |__ index.js
+*     |__ users.js
+*|── views
+*   |__ error.pug
+*   |__ index.pug
+*   |__ layout.pug
+
 
 
