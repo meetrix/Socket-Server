@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Socket.IO Chat Example</title>
+  <link rel="stylesheet" href="./stylesheets/welcome.css">
+</head>
+<body>
+  <ul class="pages">
+    <li class="chat page">
+      <div class="chatArea">
+        <ul class="messages"></ul>
+      </div>
+      <input class="inputMessage" placeholder="Type here..."/>
+    </li>
+    <li class="login page">
+      <form action="">
+        <input id="username" autocomplete="off" /><br><br>
+        <input id="room" autocomplete="off" /><button>Send</button>
+      </form>
+    </li>
+  </ul>
+
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+      $(function () {
+          var socket = io();
+          $('form').submit(function(){
+              var room =  $('#room').val();
+              var username = $('#username').val();
+              socket.emit('joinroom', {room: room, username: username});
+              $('#room').val('');
+              $('#username').val('');
+              return false;
+          });
+      });
+  </script>
+</body>
+</html>
