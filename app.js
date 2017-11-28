@@ -61,15 +61,14 @@ io.on('connection', function (socket) {
             if(allRooms.length == null)
                 id = 0;
             else id = allRooms.length++;
-            room = new Room(joinedRoom); //create a room object
+            room = new Room(joinedRoom, id); //create a room object
             allRooms[joinedRoom] = room;
         }
-        console.log(room);
         room.addPerson(username); //add the person to the room
+        //console.log(room);
         socket.join(joinedRoom); //join the room
-        //notify others in room------------------------------------
         io.sockets.in(joinedRoom).emit('userjoin', {msg:"You have joined " + joinedRoom,
-            users: room.getUsersInRoom()});
+                                                    users: room.getUsersInRoom()});
     });
 
     //Onclick by user -----------------------------------------------------------
@@ -77,8 +76,12 @@ io.on('connection', function (socket) {
         //update = {X, Y, username, room}
         var X = update.setX;
         var Y = update.setY;
+        console.log(update);
         //notify others in room----------------------------------
         io.sockets.in(update.room).emit('update-position', update);
+
+    //When a user leaves ---------------------------------------------------------------
+    socket.on('leaveroom', function () {});
     })
 });
 

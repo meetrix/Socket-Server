@@ -6,6 +6,7 @@ function Room(name, id) {
     this.numUsers = 0;
 }
 
+//add a user to the room
 Room.prototype.addPerson = function(person) {
     if (this.status === "available") {
         this.patientsInRoom.push(person);
@@ -14,7 +15,8 @@ Room.prototype.addPerson = function(person) {
     }
 };
 
-Room.prototype.getPatientsInRoom = function()  {
+//return available users
+Room.prototype.getUsersInRoom = function()  {
     return this.patientsInRoom;
 };
 
