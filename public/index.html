@@ -10,61 +10,20 @@
 </head>
 <body>
 
-<div id="cross" class="dimScreen">
+<div id="cross" class="dimScreen" onclick="point_it(event)">
 <div class = "container">
   <div class="wrapper">
-    <form action="" method="post" name="Login_Form" class="form-signin">
+    <form action="" class="form-signin">
       <h3 class="form-signin-heading">Welcome Back</h3>
-      <hr class="colorgraph"><br>
-
-      <input type="text" id="username"class="form-control" name="Username" placeholder="User name" required="" autofocus="" />
-      <input type="text" id="room" class="form-control" name="Password" placeholder="Room name" required=""/>
+      <input type="text" id="username"class="form-control" placeholder="UserName" required="" autofocus="" />
+      <input type="text" id="room" class="form-control"  placeholder="RoomName" required=""/>
       <br>
-      <button class="button-secondary" name="Submit" value="Login" type="Submit">Join</button>
+      <button class="button-secondary" onclick="setUser(getElementById('username').value, getElementById('room').value)">Join</button>
     </form>
   </div>
 </div>
 </div>
-
-
 <script src="/socket.io/socket.io.js"></script>
-<script>
-    $(function () {
-        var room, username;
-        var socket = io();
-
-        //submit username and room----------------------------------------------------------
-        $('form').submit(function(){
-            room =  $('#room').val();
-            username = $('#username').val();
-            socket.emit('joinroom', {room: room, username: username});
-            $('#room').val('');
-            $('#username').val('');
-            return false;
-        });
-
-        //update a joined user-----------------------------------------------------------
-        socket.on('userjoin', function (obj) {
-            console.log(obj);
-        });
-
-        //get coordinates on cursor clicks ----------------------------------------------------------------
-        $( "*", document.body ).click(function( event ) {
-                var x = event.pageX;
-                var y = event.pageY;
-                //console.log("X is "+x+" and Y is "+y);
-            //notify other users---------------------------------------------------
-                socket.emit('onclick', {X: x,
-                                        Y: y,
-                                        username: username,
-                                        room: room});
-        });
-
-        //notify others in the room ------------------------------------------------------
-        socket.on('update-position', function (update) {
-            console.log(update);
-        })
-    });
-</script>
+<script type="text/javascript" src="javascripts/index.js"></script>
 </body>
 </html>

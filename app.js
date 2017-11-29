@@ -67,7 +67,7 @@ io.on('connection', function (socket) {
         room.addPerson(username); //add the person to the room
         //console.log(room);
         socket.join(joinedRoom); //join the room
-        io.sockets.in(joinedRoom).emit('userjoin', {msg:"You have joined " + joinedRoom,
+        io.sockets.in(joinedRoom).emit('userjoin', {msg:"One user joined: " + joinedRoom,
                                                     users: room.getUsersInRoom()});
     });
 
@@ -78,11 +78,10 @@ io.on('connection', function (socket) {
         var Y = update.setY;
         console.log(update);
         //notify others in room----------------------------------
-        io.sockets.in(update.room).emit('update-position', update);
+        io.sockets.in(update.room).emit('update-position', update);});
 
     //When a user leaves ---------------------------------------------------------------
     socket.on('leaveroom', function () {});
-    })
 });
 
 http.listen(3030, function(){
