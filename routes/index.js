@@ -3,6 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+    //res.send({'status': 'success'});
   //res.render('index', { title: 'Express' });
     res.sendFile(__dirname + '/index.html');
 });

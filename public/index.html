@@ -13,13 +13,10 @@
 <div id="cross" class="dimScreen" onclick="point_it(event)">
 <div class = "container">
   <div class="wrapper">
-    <form action="" class="form-signin">
-      <h3 class="form-signin-heading">Welcome Back</h3>
-      <input type="text" id="username"class="form-control" placeholder="UserName" required="" autofocus="" />
-      <input type="text" id="room" class="form-control"  placeholder="RoomName" required=""/>
+      <input type="text" id="username"class="form-control" style="margin-left: 50px" placeholder="UserName" required="" autofocus="" /><br><br>
+      <input type="text" id="room" class="form-control" style="margin-left: 50px" placeholder="RoomName" required=""/><br>
       <br>
-      <button class="button-secondary" onclick="setUser(getElementById('username').value, getElementById('room').value)">Join</button>
-    </form>
+      <button class="button-secondary" id="join">Join</button>
   </div>
 </div>
 </div>
