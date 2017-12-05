@@ -11,7 +11,7 @@ Room.prototype.addPerson = function(person) {
     if (this.status === "available") {
         this.patientsInRoom.push(person);
         this.numUsers++;
-        console.log('one added ' +person  +' ' + this.numUsers);
+        console.log('Added ' +person  +' ' + this.numUsers);
     }
 };
 
