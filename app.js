@@ -5,11 +5,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var fs = require('fs');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+
+var privateKey  = fs.readFileSync('cred/ssl-cert-snakeoil.key', 'utf8');
+var certificate = fs.readFileSync('cred/ssl-cert-snakeoil.pem', 'utf8');
+var credentials = {key: privateKey, cert: certificate};
+var https = require('https').Server(credentials,app);
+var io = require('socket.io')(https);
 
 //Room concept-------------
 var Room = require('./room.js');
@@ -84,7 +89,7 @@ io.on('connection', function (socket) {
     socket.on('leaveroom', function () {});
 });
 
-http.listen(3030, function(){
+https.listen(3030, function(){
     //socket server at port 3030
     console.log('listening on *:3030');
 });
