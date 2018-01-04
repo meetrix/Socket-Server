@@ -10,8 +10,14 @@ var io = require('socket.io')(http);
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var upload = require('./routes/upload');
 var Room = require('./room.js');
+var cors = require('cors')
 
+var corsOptions = {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,9 +30,32 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var socket;
+
+//socketio -------------------------------------------------------------------------------------------------
+io.on('connection', function (socket) {
+    console.log('new connection ...');
+    socket =socket
+    //Connect to room-------------------------------------------------------
+    socket.on('joinroom', function(user) {
+        var username = user;
+        console.log(user);
+        console.log(user.room);
+        console.log(user.username);
+
+    });
+
+
+
+
+});
+
+app.set('socket',socket);
+app.set('io',io);
+
 app.use('/', index);
 app.use('/users', users);
-
+app.use('/upload',upload);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -45,19 +74,10 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-//socketio -------------------------------------------------------------------------------------------------
-io.on('connection', function (socket) {
-    console.log('new connection ...');
 
-    //Connect to room-------------------------------------------------------
-    socket.on('joinroom', function(user) {
-        var username = user;
-        console.log(user);
-        console.log(user.room);
-        console.log(user.username);
-    });
 
-});
+
+
 
 http.listen(3030, function(){
     console.log('listening on *:3030');
